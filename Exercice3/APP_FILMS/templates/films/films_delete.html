@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}DELETE USER{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Effacer ce user.
+			</p>
+			<form method="POST" action="{{ url_for('films_delete') }}">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>
+                                id user
+                            </th>
+                            <th>
+                                Nom
+                            </th>
+                        </tr>
+                    </thead>
+                    {% for row in data %}
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="hidden" name="id_user_delete_html" value="{{ row.id_user }}"/>
+                                </td>
+                                <td>
+                                    {{ row.Nom }}
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" type="submit">EFFACER</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,348 @@
+--
+-- OSMAN MOHAMMED 10.03.2020
+-- MY DATABASE FOR PHYSICAL INVENTORY
+-- Database: OSMAN_MOHAMMED_DATABASE_1C_2020
+
+-- Détection si une autre base de donnée du même nom existe
+
+DROP DATABASE if exists OSMAN_MOHAMMED_DATABASE_1C_2020;
+
+-- Création d'un nouvelle base de donnée
+
+CREATE DATABASE IF NOT EXISTS OSMAN_MOHAMMED_DATABASE_1C_2020;
+
+-- Utilisation de cette base de donnée
+
+USE  OSMAN_MOHAMMED_DATABASE_1C_2020;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `t_fournisseur`
+--
+
+CREATE TABLE `t_fournisseur` (
+  `Id_fournisseur` int(11) NOT NULL,
+  `fournisseur` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `t_fournisseur`
+--
+
+INSERT INTO `t_fournisseur` (`Id_fournisseur`, `fournisseur`) VALUES
+(1, 'test'),
+(2, 'hp'),
+(3, 'lenovo'),
+(4, 'bonjou5re5r');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `t_location`
+--
+
+CREATE TABLE `t_location` (
+  `Id_location` int(11) NOT NULL,
+  `site` varchar(30) NOT NULL,
+  `OfficeNum` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `t_material`
+--
+
+CREATE TABLE `t_material` (
+  `Id_material` int(11) NOT NULL,
+  `Material` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `t_material`
+--
+
+INSERT INTO `t_material` (`Id_material`, `Material`) VALUES
+(3, 'highstestutut'),
+(4, 'Pcpig'),
+(5, 'Desktop1 '),
+(6, 'laptopspectre'),
+(7, 'screen'),
+(8, 'screen'),
+(9, 'ho'),
+(10, 'tim'),
+(11, 'ha'),
+(12, 'hahaha'),
+(14, 'oudif'),
+(15, 'wowowo'),
+(16, 'oioi'),
+(17, 'miodj'),
+(18, 'ouoihiut'),
+(19, 'ha'),
+(20, 'hehehtu'),
+(21, 'hehehhohi'),
+(22, 'mastul'),
+(23, 'oudifff');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `t_material_fornisseur`
+--
+
+CREATE TABLE `t_material_fornisseur` (
+  `Id_t_r_material_fournisseur` int(11) NOT NULL,
+  `FK_material` int(11) NOT NULL,
+  `Fk_fournisseur` int(11) NOT NULL,
+  `Date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `t_material_location`
+--
+
+CREATE TABLE `t_material_location` (
+  `Id_t_r_material_location` int(11) NOT NULL,
+  `FK_material` int(11) NOT NULL,
+  `FK_location` int(11) NOT NULL,
+  `Date` date NOT NULL,
+  `Last_phy_inventory` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `t_material_status`
+--
+
+CREATE TABLE `t_material_status` (
+  `Id_t_r_material_status` int(11) NOT NULL,
+  `FK_material` int(11) NOT NULL,
+  `Fk_status` int(11) NOT NULL,
+  `Date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `t_status`
+--
+
+CREATE TABLE `t_status` (
+  `Id_status` int(11) NOT NULL,
+  `status` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `t_user`
+--
+
+CREATE TABLE `t_user` (
+  `Id_user` int(11) NOT NULL,
+  `Nom` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `t_user`
+--
+
+INSERT INTO `t_user` (`Id_user`, `Nom`) VALUES
+(1, 'bonjour'),
+(2, 'adem'),
+(3, 'Oman'),
+(5, 'Oman'),
+(6, 'grosse crocoll'),
+(7, 'tutu'),
+(8, 'rayes'),
+(9, 'test'),
+(10, 'bommmn');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `t_user_material`
+--
+
+CREATE TABLE `t_user_material` (
+  `Id_t_r_user_material` int(11) NOT NULL,
+  `Fk_user` int(11) NOT NULL,
+  `Fk_material` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `t_user_material`
+--
+
+INSERT INTO `t_user_material` (`Id_t_r_user_material`, `Fk_user`, `Fk_material`) VALUES
+(1, 1, 3),
+(4, 1, 3),
+(5, 2, 3),
+(6, 1, 6),
+(7, 1, 3),
+(8, 1, 3),
+(9, 2, 3),
+(10, 1, 6),
+(11, 1, 3),
+(12, 1, 6),
+(13, 1, 7),
+(14, 1, 10),
+(15, 1, 3),
+(16, 1, 6),
+(17, 1, 7),
+(18, 1, 5);
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `t_fournisseur`
+--
+ALTER TABLE `t_fournisseur`
+  ADD PRIMARY KEY (`Id_fournisseur`);
+
+--
+-- Index pour la table `t_location`
+--
+ALTER TABLE `t_location`
+  ADD PRIMARY KEY (`Id_location`);
+
+--
+-- Index pour la table `t_material`
+--
+ALTER TABLE `t_material`
+  ADD PRIMARY KEY (`Id_material`);
+
+--
+-- Index pour la table `t_material_fornisseur`
+--
+ALTER TABLE `t_material_fornisseur`
+  ADD PRIMARY KEY (`Id_t_r_material_fournisseur`),
+  ADD KEY `FK_material` (`FK_material`),
+  ADD KEY `Fk_fournisseur` (`Fk_fournisseur`);
+
+--
+-- Index pour la table `t_material_location`
+--
+ALTER TABLE `t_material_location`
+  ADD PRIMARY KEY (`Id_t_r_material_location`),
+  ADD KEY `FK_material` (`FK_material`),
+  ADD KEY `FK_location` (`FK_location`);
+
+--
+-- Index pour la table `t_material_status`
+--
+ALTER TABLE `t_material_status`
+  ADD PRIMARY KEY (`Id_t_r_material_status`),
+  ADD KEY `FK_material` (`FK_material`),
+  ADD KEY `Fk_status` (`Fk_status`);
+
+--
+-- Index pour la table `t_status`
+--
+ALTER TABLE `t_status`
+  ADD PRIMARY KEY (`Id_status`);
+
+--
+-- Index pour la table `t_user`
+--
+ALTER TABLE `t_user`
+  ADD PRIMARY KEY (`Id_user`);
+
+--
+-- Index pour la table `t_user_material`
+--
+ALTER TABLE `t_user_material`
+  ADD PRIMARY KEY (`Id_t_r_user_material`),
+  ADD KEY `Fk_user` (`Fk_user`),
+  ADD KEY `Fk_material` (`Fk_material`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `t_fournisseur`
+--
+ALTER TABLE `t_fournisseur`
+  MODIFY `Id_fournisseur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT pour la table `t_location`
+--
+ALTER TABLE `t_location`
+  MODIFY `Id_location` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `t_material`
+--
+ALTER TABLE `t_material`
+  MODIFY `Id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+--
+-- AUTO_INCREMENT pour la table `t_material_fornisseur`
+--
+ALTER TABLE `t_material_fornisseur`
+  MODIFY `Id_t_r_material_fournisseur` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `t_material_location`
+--
+ALTER TABLE `t_material_location`
+  MODIFY `Id_t_r_material_location` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `t_material_status`
+--
+ALTER TABLE `t_material_status`
+  MODIFY `Id_t_r_material_status` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `t_status`
+--
+ALTER TABLE `t_status`
+  MODIFY `Id_status` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `t_user`
+--
+ALTER TABLE `t_user`
+  MODIFY `Id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT pour la table `t_user_material`
+--
+ALTER TABLE `t_user_material`
+  MODIFY `Id_t_r_user_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `t_material_fornisseur`
+--
+ALTER TABLE `t_material_fornisseur`
+  ADD CONSTRAINT `T_material_fornisseur_ibfk_1` FOREIGN KEY (`FK_material`) REFERENCES `t_material` (`Id_material`),
+  ADD CONSTRAINT `T_material_fornisseur_ibfk_2` FOREIGN KEY (`Fk_fournisseur`) REFERENCES `t_fournisseur` (`Id_fournisseur`);
+
+--
+-- Contraintes pour la table `t_material_location`
+--
+ALTER TABLE `t_material_location`
+  ADD CONSTRAINT `T_material_location_ibfk_1` FOREIGN KEY (`FK_material`) REFERENCES `t_material` (`Id_material`),
+  ADD CONSTRAINT `T_material_location_ibfk_2` FOREIGN KEY (`FK_location`) REFERENCES `t_location` (`Id_location`);
+
+--
+-- Contraintes pour la table `t_material_status`
+--
+ALTER TABLE `t_material_status`
+  ADD CONSTRAINT `T_material_status_ibfk_1` FOREIGN KEY (`FK_material`) REFERENCES `t_material` (`Id_material`),
+  ADD CONSTRAINT `T_material_status_ibfk_2` FOREIGN KEY (`Fk_status`) REFERENCES `t_status` (`Id_status`);
+
+--
+-- Contraintes pour la table `t_user_material`
+--
+ALTER TABLE `t_user_material`
+  ADD CONSTRAINT `T_user_material_ibfk_1` FOREIGN KEY (`Fk_user`) REFERENCES `t_user` (`Id_user`),
+  ADD CONSTRAINT `T_user_material_ibfk_2` FOREIGN KEY (`Fk_material`) REFERENCES `t_material` (`Id_material`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
