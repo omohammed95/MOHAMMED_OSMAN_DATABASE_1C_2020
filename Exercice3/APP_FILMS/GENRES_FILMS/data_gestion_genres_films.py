@@ -60,7 +60,7 @@ class GestionGenresFilms():
             # Pour "lever"(raise) une erreur s'il y a des erreurs sur les noms d'attributs dans la table
             # donc, je précise les champs à afficher
 
-            strsql_film_selected = """SELECT id_user, Nom, Prenom, UserNom, GROUP_CONCAT(id_material) as UserMaterial FROM t_user_material AS T1
+            strsql_film_selected = """SELECT id_user, Nom, GROUP_CONCAT(id_material) as UserMaterial FROM t_user_material AS T1
                                         INNER JOIN t_user AS T2 ON T2.id_user = T1.fk_user
                                         INNER JOIN t_material AS T3 ON T3.id_material = T1.fk_material
                                         WHERE id_user = %(value_id_user_selected)s"""
@@ -123,7 +123,7 @@ class GestionGenresFilms():
             # Pour "lever"(raise) une erreur s'il y a des erreurs sur les noms d'attributs dans la table
             # donc, je précise les champs à afficher
 
-            strsql_genres_films_afficher_data_concat = """SELECT id_user, Nom, Prenom, UserNom,
+            strsql_genres_films_afficher_data_concat = """SELECT id_user, Nom,
                                                             GROUP_CONCAT(material) as UserMaterial FROM t_user_material AS T1
                                                             RIGHT JOIN t_user AS T2 ON T2.id_user = T1.fk_user
                                                             LEFT JOIN t_material AS T3 ON T3.id_material = T1.fk_material

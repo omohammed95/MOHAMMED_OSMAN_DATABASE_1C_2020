@@ -55,7 +55,7 @@
 			  USER
 			</a>
 			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-			  <a class="dropdown-item" href="{{ url_for('films_afficher') }}">USER</a>
+			  <a class="dropdown-item" href="{{ url_for('films_afficher', order_by='ASC', id_user_sel=0) }}">USER</a>
 			  <a class="dropdown-item" href="{{ url_for('genres_films_afficher_concat', id_film_sel=0) }}">USER and MATERIAL</a>
 			</div>
 		  </li>
