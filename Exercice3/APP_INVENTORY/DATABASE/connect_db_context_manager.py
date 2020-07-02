@@ -9,7 +9,7 @@
 # Le coeur du système pour la connexion à la BD
 # Si on utilise MAMP il faut choisir import mysql.connector
 # https://dev.mysql.com/downloads/connector/python/
-from APP_FILMS.DATABASE.erreurs import *
+import APP_INVENTORY.DATABASE.erreurs
 # Petits messages "flash", échange entre Python et Jinja dans une page en HTML
 from flask import flash
 
@@ -27,12 +27,12 @@ class MaBaseDeDonnee():
             # OM 2019.04.05 ON SE CONNECTE A LA BASE DE DONNEE
             # ATTENTION : LE MOT DE PASSE PEUT CHANGER SUIVANT LE SERVEUR MySql QUE VOUS CHOISISSEZ !!! (Uwamp, Xampp, etc)
             # autocommit doit être à False, sa valeur est testée lors de la sortie de cette classe.
-            self.connexion_bd = pymysql.connect(host=self.host,
-                                                user=self.user,
-                                                password=self.password,
-                                                db=self.db,
-                                                cursorclass=pymysql.cursors.DictCursor,
-                                                autocommit=False)
+            self.connexion_bd = APP_INVENTORY.DATABASE.erreurs.pymysql.connect(host=self.host,
+                                                                               user=self.user,
+                                                                               password=self.password,
+                                                                               db=self.db,
+                                                                               cursorclass=APP_INVENTORY.DATABASE.erreurs.pymysql.cursors.DictCursor,
+                                                                               autocommit=False)
             print("Avec CM BD  CONNECTÉE, TOUT va BIEN !! Dans le constructeur")
             print("self.con....", dir(self.connexion_bd), "type of self.con : ", type(self.connexion_bd))
 
@@ -40,8 +40,8 @@ class MaBaseDeDonnee():
         #
         except (Exception,
                 ConnectionRefusedError,
-                pymysql.err.OperationalError,
-                pymysql.err.DatabaseError) as erreur:
+                APP_INVENTORY.DATABASE.erreurs.pymysql.err.OperationalError,
+                APP_INVENTORY.DATABASE.erreurs.pymysql.err.DatabaseError) as erreur:
             # OM 2019.03.09 SI LA BD N'EST PAS CONNECTÉE, ON ENVOIE AU TERMINAL DES MESSAGES POUR RASSURER L'UTILISATEUR.
             # Petits messages "flash", échange entre Python et Jinja dans une page en HTML
             flash(f"Flash....BD NON CONNECTÉE. Erreur : {erreur.args[1]}", "danger")
@@ -49,7 +49,7 @@ class MaBaseDeDonnee():
             # voir fichier "run_mon_app.py"
             # Celle-ci est assez complète... mais il y a toujours mieux
             print("erreur...MaBaseDeDonnee.__init__ ",erreur.args[1])
-            raise MaBdErreurConnexion(f"{msg_erreurs['ErreurConnexionBD']['message']} {erreur.args[1]}")
+            raise APP_INVENTORY.DATABASE.erreurs.MaBdErreurConnexion(f"{APP_INVENTORY.DATABASE.erreurs.msg_erreurs['ErreurConnexionBD']['message']} {erreur.args[1]}")
         print("Avec CM BD  INIT !! ")
 
     # Après la méthode __init__ il passe à __enter__, c'est là qu'il faut surveiller le bon déroulement
@@ -95,3 +95,4 @@ class MaBaseDeDonnee():
     def mabd_fetchall(self):
         return self.connexion_bd.cursor().fetchall()
 
+8

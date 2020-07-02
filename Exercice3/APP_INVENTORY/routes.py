@@ -2,8 +2,8 @@
 # OM 2020.04.02 Pour faire des tests divers et variés.
 
 from flask import render_template,session
-from APP_FILMS import obj_mon_application
-from APP_FILMS.DATABASE.erreurs import *
+from APP_INVENTORY import obj_mon_application
+from APP_INVENTORY.DATABASE.erreurs import *
 
 
 @obj_mon_application.route('/index')
@@ -45,7 +45,7 @@ def personnes_taille_dict():
     # nom_personne = "Gégé"
     # nom_personne = "Hugo"
 
-    nom_personne = "OM"
+    nom_personne = "Pignon"
 
     try:
         # Tout se passe normalement

@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{% block title %} Afficher Material {% endblock %}
+{% block title %} Afficher material {% endblock %}
 {% block body %}
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
 			<p>
-				Material à disposition.
+				material à disposition.
 			</p>
             <table class="table table-bordered table-sm">
             {% if data %}
@@ -15,7 +15,7 @@
                             id
                         </th>
                         <th class="align-middle">
-                            Material
+                            material
                         </th>
                         <th class="align-middle">
 
@@ -40,13 +40,13 @@
 							{{ row.material }}
 						</td>
 						<td class="text-center" class="align-middle">
-							<a class="btn btn-primary" href="{{ url_for('genres_add') }}" role="button">Ajouter</a>
+							<a class="btn btn-primary" href="{{ url_for('material_add') }}" role="button">Ajouter</a>
 						</td>
 						<td class="text-center" class="align-middle">
-							<a class="btn btn-warning" href="{{ url_for('genres_edit', id_material_edit_html=row.id_material) }}" role="button">Edit</a>
+							<a class="btn btn-warning" href="{{ url_for('material_edit', id_material_edit_html=row.id_material) }}" role="button">Edit</a>
 						</td>
 						<td class="text-center" class="align-middle">
-							<a class="btn btn-danger" href="{{ url_for('genres_select_delete', id_material_delete_html=row.id_material) }}" role="button">Delete</a>
+							<a class="btn btn-danger" href="{{ url_for('material_select_delete', id_material_delete_html=row.id_material) }}" role="button">Delete</a>
 						</td>
 					</tr>
 				</tbody>
@@ -57,7 +57,7 @@
 							Aucun material.
 						</td>
 						<td>
-							<a class="btn btn-primary" href="{{ url_for('genres_add') }}" role="button">Ajouter</a>
+							<a class="btn btn-primary" href="{{ url_for('material_add') }}" role="button">Ajouter</a>
 						</td>
 					</tr>
 				</tbody>

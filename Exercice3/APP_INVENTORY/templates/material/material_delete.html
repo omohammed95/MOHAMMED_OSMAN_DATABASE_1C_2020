@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}DELETE MATERIAL{% endblock %}
+{% block title %}DELETE material{% endblock %}
 {% block body %}
 <div class="container">
 	<div class="row">
@@ -7,7 +7,7 @@
 			<p>
 				Effacer ce material.
 			</p>
-			<form method="POST" action="{{ url_for('genres_delete') }}">
+			<form method="POST" action="{{ url_for('material_delete') }}">
                 <table class="table table-bordered table-sm">
                     <thead>
                         <tr>
@@ -15,7 +15,7 @@
                                 id material
                             </th>
                             <th>
-                                Material
+                                material
                             </th>
                         </tr>
                     </thead>

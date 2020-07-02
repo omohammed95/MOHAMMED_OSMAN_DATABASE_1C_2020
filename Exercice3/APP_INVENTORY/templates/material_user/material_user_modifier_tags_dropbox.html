@@ -1,10 +1,11 @@
 {% extends "base.html" %}
-{% block title %} Afficher USER MATERIAL {% endblock %}
+{% block title %} Afficher FILMS GENRES {% endblock %}
 {% block head %}
     <!--
         OM 2020.05.04
         On utilise le composant "tags-selector-tagselect" juste dans cette page,
          il n'est pas nécessaire de la charger pour chaque page
+
         c'est pourquoi il ne se trouve pas dans "base.html" mais ici
         entre les balises JINJA "block head" "endblock"
         -->
@@ -30,12 +31,6 @@
 
 <div class="container">
 		<div class="col-md-12">
-			<p>
-				Tagselect, c'est une DROPBOX qui surgit quand on sélectionne l'espace "TAGS". Le composant TAGSELECT est à disposition sur ce site :
-                 <a href="https://www.jqueryscript.net/form/tags-selector-tagselect.html"
-                    target="_blank">https://www.jqueryscript.net/form/tags-selector-tagselect.html</a>
-				Films.
-			</p>
             <table class="table table-responsive-sm">
                 {% if data_user_selected %}
                     <thead>
@@ -44,25 +39,13 @@
                                 id
                             </th>
                             <th class="">
-                                Titre
-                            </th>
-                            <th class="">
-                                Durée
-                            </th>
-                            <th class="">
-                                Date sortie
-                            </th>
-                            <th class="">
-                                Description
-                            </th>
-                            <th class="">
-                                Affiche
+                                Nom
                             </th>
                         </tr>
                     </thead>
             {% endif %}
 
-            {% for row in data_films_selected %}
+            {% for row in data_user_selected %}
 				<tbody>
 					<tr>
 						<td class="align-middle">
@@ -70,17 +53,6 @@
 						</td>
 						<td class="align-middle">
 							{{ row.Nom }}
-						</td>
-						<td class="align-middle">
-							{{ row.Prenom }}
-						</td>
-						<td class="align-middle">
-							{{ row.UserNom }}
-						</td>
-						<td class="align-middle">
-<!--                            <img class="img-thumbnail" src={{ row.cover_link_film|default(None, True) }} style="border: 0;display: block;width:auto;max-height:450px;" alt = "Covid-19 grand semi-confinement mod 104">-->
-                            <img class="img-thumbnail" src={{ True }} style="border: 0;" alt = "Covid-19 grand semi-confinement mod 104">
-						</td>
 					</tr>
 				</tbody>
             {% else %}
@@ -103,15 +75,15 @@
     <div class="row mx-md-n5">
       <div class="col px-md-5">
           <div class="p-3">
-            <form id="form_tags_select_confirm" action="{{ url_for('gf_update_genre_film_selected') }}" method="POST">
+            <form id="form_tags_select_confirm" action="{{ url_for('gf_update_material_user_selected') }}" method="POST">
                 <div class="qtagselect isw360">
                     <select id="OM_JTSD" name="name_select_tags" class="qtagselect__select" multiple>
-                        {% for row in data_genres_non_attribues %}
-                            <option value="{{ row.id_material }}" name="name_tags_non_attribues_html" class="isblue" >{{ row.material }}</option>
+                        {% for row in data_materials_non_attribues %}
+                            <option value="{{ row.id_material }}" name="name_tags_non_attribues_html" class="isblue" >{{ row.Material }}</option>
                         {% endfor %}
 
-                        {% for row in data_genres_attribues %}
-                            <option value="{{ row.id_material }}" name="name_tags_attribues_html" class="ispurple" selected>{{ row.material }}</option>
+                        {% for row in data_materials_attribues %}
+                            <option value="{{ row.id_matertial }}" name="name_tags_attribues_html" class="ispurple" selected>{{ row.Material }}</option>
                         {% endfor %}
                     </select>
                 </div>

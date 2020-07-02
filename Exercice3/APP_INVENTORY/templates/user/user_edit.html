@@ -1,18 +1,18 @@
 {% extends "base.html" %}
-{% block title %}DELETE USER{% endblock %}
+{% block title %}Edit User{% endblock %}
 {% block body %}
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
 			<p>
-				Effacer ce user.
+				Modifier ce user.
 			</p>
-			<form method="POST" action="{{ url_for('films_delete') }}">
+			<form method="POST" action="{{ url_for('user_update') }}">
                 <table class="table table-bordered table-sm">
                     <thead>
                         <tr>
                             <th>
-                                id user
+                                id User
                             </th>
                             <th>
                                 Nom
@@ -23,13 +23,13 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <input type="hidden" name="id_user_delete_html" value="{{ row.id_user }}"/>
+                                    <input type="hidden" name="id_user_edit_html" value="{{ row.id_user}}"/>
                                 </td>
                                 <td>
-                                    {{ row.Nom }}
+                                    <input type = "text" name = "Nom_html" value="{{ row.Nom }}"/>
                                 </td>
                                 <td>
-                                    <button class="btn btn-danger" type="submit">EFFACER</button>
+                                    <button class="btn btn-warning" type="submit">Update</button>
                                 </td>
                             </tr>
                         </tbody>
